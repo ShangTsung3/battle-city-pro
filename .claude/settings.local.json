@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout:*)",
+      "Bash(npm install:*)",
+      "Bash(ipconfig:*)",
+      "Bash(findstr:*)",
+      "Bash(npm run server:*)",
+      "Bash(ping:*)",
+      "Bash(taskkill:*)",
+      "Bash(node server.cjs:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}
