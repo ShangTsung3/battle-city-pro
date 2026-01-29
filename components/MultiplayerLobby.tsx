@@ -14,7 +14,7 @@ interface MultiplayerLobbyProps {
 }
 
 export const MultiplayerLobby: React.FC<MultiplayerLobbyProps> = ({ onBack, onStartGame, playerName }) => {
-  const [serverIp, setServerIp] = useState('localhost');
+  const [serverIp, setServerIp] = useState('battle-city-server-8cqf.onrender.com');
   const [socket, setSocket] = useState<Socket | null>(null);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
@@ -31,9 +31,12 @@ export const MultiplayerLobby: React.FC<MultiplayerLobbyProps> = ({ onBack, onSt
     setConnecting(true);
     setError(null);
 
-    const newSocket = io(`http://${serverIp}:3001`, {
+    // Use https for remote server, http for localhost
+    const isLocal = serverIp === 'localhost' || serverIp.startsWith('192.168');
+    const url = isLocal ? `http://${serverIp}:3001` : `https://${serverIp}`;
+    const newSocket = io(url, {
       transports: ['websocket', 'polling'],
-      timeout: 5000
+      timeout: 10000
     });
 
     socketRef.current = newSocket;
