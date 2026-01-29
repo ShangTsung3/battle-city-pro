@@ -761,7 +761,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
         }
       });
 
-      const detectRange = TILE_SIZE * 8; // Detection range
+      const detectRange = TILE_SIZE * 5; // Detection range
       const hasTarget = nearestEnemy && nearestDist < detectRange;
 
       // AI movement
@@ -785,9 +785,9 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       // Normalize angle difference to [-PI, PI]
       while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
       while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-      player.angle += Math.sign(angleDiff) * Math.min(Math.abs(angleDiff), 0.06);
+      player.angle += Math.sign(angleDiff) * Math.min(Math.abs(angleDiff), 0.03);
 
-      const aiSpeed = hasTarget ? 0.25 : 0.15; // Faster when hunting
+      const aiSpeed = hasTarget ? 0.18 : 0.1; // Slower AI
       const adx = Math.cos(player.angle) * aiSpeed;
       const ady = Math.sin(player.angle) * aiSpeed;
 
@@ -808,7 +808,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       const angleSettled = Math.abs(angleDiff) < 0.2;
       if (hasTarget && angleSettled) {
         // Aggressive firing when target in sight
-        if (Math.random() < 0.04) fire(player);
+        if (Math.random() < 0.02) fire(player);
       } else if (angleSettled && Math.random() < 0.005) {
         // Occasional random shot while patrolling
         fire(player);

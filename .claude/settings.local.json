@@ -19,7 +19,9 @@
       "Bash(gh repo create:*)",
       "Bash(git push)",
       "Bash(where:*)",
-      "Bash(npx vite build)"
+      "Bash(npx vite build)",
+      "Bash(npx gh-pages -d dist)",
+      "Bash(gh api:*)"
     ]
   }
 }
