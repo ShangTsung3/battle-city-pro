@@ -21,7 +21,8 @@
       "Bash(where:*)",
       "Bash(npx vite build)",
       "Bash(npx gh-pages -d dist)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(netsh advfirewall firewall add rule:*)"
     ]
   }
 }

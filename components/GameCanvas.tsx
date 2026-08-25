@@ -171,8 +171,8 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           dir: Direction.DOWN,
           speed: 0,
           type: 'enemy',
-          health: aiPreset.health,
-          maxHealth: aiPreset.health,
+          health: Math.max(2, aiPreset.health - 2),
+          maxHealth: Math.max(2, aiPreset.health - 2),
           recoil: 0,
           bulletLevel: 1,
           speedLevel: 1,
@@ -228,8 +228,8 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           dir: Direction.DOWN,
           speed: 0,
           type: 'enemy',
-          health: aiPreset.health,
-          maxHealth: aiPreset.health,
+          health: Math.max(2, aiPreset.health - 2),
+          maxHealth: Math.max(2, aiPreset.health - 2),
           recoil: 0,
           bulletLevel: 1,
           speedLevel: 1,
@@ -761,7 +761,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
         }
       });
 
-      const detectRange = TILE_SIZE * 5; // Detection range
+      const detectRange = TILE_SIZE * 3; // Short detection range
       const hasTarget = nearestEnemy && nearestDist < detectRange;
 
       // AI movement
@@ -785,9 +785,9 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       // Normalize angle difference to [-PI, PI]
       while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
       while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-      player.angle += Math.sign(angleDiff) * Math.min(Math.abs(angleDiff), 0.03);
+      player.angle += Math.sign(angleDiff) * Math.min(Math.abs(angleDiff), 0.02);
 
-      const aiSpeed = hasTarget ? 0.18 : 0.1; // Slower AI
+      const aiSpeed = hasTarget ? 0.12 : 0.07; // Weak AI
       const adx = Math.cos(player.angle) * aiSpeed;
       const ady = Math.sin(player.angle) * aiSpeed;
 
@@ -808,7 +808,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       const angleSettled = Math.abs(angleDiff) < 0.2;
       if (hasTarget && angleSettled) {
         // Aggressive firing when target in sight
-        if (Math.random() < 0.02) fire(player);
+        if (Math.random() < 0.01) fire(player);
       } else if (angleSettled && Math.random() < 0.005) {
         // Occasional random shot while patrolling
         fire(player);
